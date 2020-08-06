@@ -9,80 +9,116 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.animation.AnimationUtils
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.indicator1
+import kotlinx.android.synthetic.main.activity_main.indicator2
+import kotlinx.android.synthetic.main.activity_main.indicator3
+import kotlinx.android.synthetic.main.activity_main.indicator4
+import kotlinx.android.synthetic.main.activity_main.indicators
+import kotlinx.android.synthetic.main.activity_main.key_0
+import kotlinx.android.synthetic.main.activity_main.key_1
+import kotlinx.android.synthetic.main.activity_main.key_2
+import kotlinx.android.synthetic.main.activity_main.key_3
+import kotlinx.android.synthetic.main.activity_main.key_4
+import kotlinx.android.synthetic.main.activity_main.key_5
+import kotlinx.android.synthetic.main.activity_main.key_6
+import kotlinx.android.synthetic.main.activity_main.key_7
+import kotlinx.android.synthetic.main.activity_main.key_8
+import kotlinx.android.synthetic.main.activity_main.key_9
+import kotlinx.android.synthetic.main.activity_main.key_backspace
+import kotlinx.android.synthetic.main.activity_main.key_clear
+import kotlinx.android.synthetic.main.activity_main.keyboard
+import kotlinx.android.synthetic.main.activity_set_pin.*
 
-class MainActivity : AppCompatActivity() {
 
-    var c: Int = 0
-    var str = ""
-    lateinit var pinManager: PinManager
+var c: Int = 0
+var k: Int = 0
+var str1 = ""
+var str2 = ""
+var flag = false
+lateinit var pinManager: PinManager
 
+
+class SetPin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        var str = ""
+        setContentView(R.layout.activity_set_pin)
         pinManager = PinManager(this)
-        if (pinManager.getPin().isNullOrEmpty()) {
-            val i = Intent(this, SetPin::class.java)
-            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(i)
-        }
+        var str1 = ""
+        var str2 = ""
         key_1.setOnClickListener {
-            count("1")
+            save("1")
         }
         key_2.setOnClickListener {
-            count("2")
+            save("2")
         }
         key_3.setOnClickListener {
-            count("3")
+            save("3")
         }
         key_4.setOnClickListener {
-            count("4")
+            save("4")
         }
         key_5.setOnClickListener {
-            count("5")
+            save("5")
         }
         key_6.setOnClickListener {
-            count("6")
+            save("6")
         }
         key_7.setOnClickListener {
-            count("7")
+            save("7")
         }
         key_8.setOnClickListener {
-            count("8")
+            save("8")
         }
         key_9.setOnClickListener {
-            count("9")
+            save("9")
         }
         key_0.setOnClickListener {
-            count("0")
+            save("0")
         }
         key_backspace.setOnClickListener {
-            onBackPressed()
+            if (flag) {
+                clear()
+            } else {
+                onBackPressed()
+            }
         }
         key_clear.setOnClickListener {
-            clear()
+            if (flag) {
+                Set1()
+                c = 4
+                str2 = ""
+                k = 4
+            } else {
+                clear()
+            }
         }
-
     }
 
-    fun count(s: String) {
-        if (c >= 4) {
-            c = 4
+    fun save(s: String) {
+
+        if (!flag) {
+            str1 += s
+            c++;
         } else {
-            str += s
+            str2 += s
             c++;
         }
-        update(c, str)
+        k++
+        update(c, str1, str2)
     }
 
     fun clear() {
         c = 0;
-        str = ""
-        update(c, "")
+        str1 = ""
+        str2 = ""
+        k = 0
+        flag = false
+        text.text = "Set Lock Screen Password"
+        Set1()
     }
 
-    fun update(c: Int, str: String) {
+
+    fun update(c: Int, str1: String, str2: String) {
 
         val vibrate = AnimationUtils.loadAnimation(this, R.anim.vibrate)
 
@@ -91,24 +127,29 @@ class MainActivity : AppCompatActivity() {
             0 -> {
                 Set1()
             }
-            1 -> {
+            1, 5 -> {
                 Set2()
             }
-            2 -> {
+            2, 6 -> {
                 Set3()
             }
-            3 -> {
+            3, 7 -> {
                 Set4()
             }
-            4 -> {
+            4, 8 -> {
                 Set5()
             }
         }
-
         if (c == 4) {
+            flag = true
+            text.text = "Confirm Lock Screen Password"
+            Set1()
+        }
 
-            if (str == pinManager.getPin()) {
-                val i = Intent(this, FakeActivity::class.java)
+        if (k % 8 == 0 && k != 0) {
+            if (str1 == str2) {
+                pinManager.savePin(str1)
+                val i = Intent(this, MainActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
             } else {
@@ -116,14 +157,10 @@ class MainActivity : AppCompatActivity() {
                 keyboard.startAnimation(vibrate)
                 Shake()
                 clear()
-                indicator1.setColorFilter(Color.parseColor("#75DAFA"))
-                indicator2.setColorFilter(Color.parseColor("#75DAFA"))
-                indicator3.setColorFilter(Color.parseColor("#75DAFA"))
-                indicator4.setColorFilter(Color.parseColor("#75DAFA"))
+                Set1()
             }
         }
     }
-
 
     fun Shake() {
         val DURATION = 200
@@ -137,7 +174,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
 
     fun Set1() {
         indicator1.setColorFilter(Color.parseColor("#75DAFA"))

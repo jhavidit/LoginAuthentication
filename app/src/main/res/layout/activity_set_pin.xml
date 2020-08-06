@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".MainActivity">
-
+    tools:context=".SetPin">
 
 
     <TextView
+        android:id="@+id/text"
         android:layout_above="@id/indicators"
         android:layout_marginBottom="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Enter Password"
+        android:text="Set Lock Screen Password"
         android:textSize="20sp"
         android:textStyle="bold|normal"/>
 
     <LinearLayout
         android:id="@+id/indicators"
-        android:layout_marginBottom="32dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/keyboard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
             android:id="@+id/indicator1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
             android:src="@drawable/circle2" />
 
         <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
             android:id="@+id/indicator2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
             android:src="@drawable/circle2" />
 
         <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
             android:id="@+id/indicator3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
             android:src="@drawable/circle2" />
 
         <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
             android:id="@+id/indicator4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/eight"
+            android:layout_marginRight="@dimen/eight"
             android:src="@drawable/circle2" />
     </LinearLayout>
 
