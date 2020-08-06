@@ -8,7 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.provider.Settings
+import android.util.Log
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +29,54 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var str = ""
         pinManager = PinManager(this)
+
+        val biometricManager = BiometricManager.from(this)
+        when (biometricManager.canAuthenticate()) {
+            BiometricManager.BIOMETRIC_SUCCESS ->
+                Log.d("MY_APP_TAG", "App can authenticate using biometrics.")
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
+
+            Snackbar.make(coordinator_layout,"No biometric features available on this device.",Snackbar.LENGTH_LONG).show()
+
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
+            Snackbar.make(coordinator_layout,"Biometric features are currently unavailable.",Snackbar.LENGTH_LONG).show()
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+
+                Snackbar.make(coordinator_layout,"Add your fingerprint from the settings ",Snackbar.LENGTH_INDEFINITE).setAction("GO") {
+                    startActivity(Intent(Settings.ACTION_SECURITY_SETTINGS))
+                }.show()
+
+            }
+        }
+        val activity = this
+        val executor = ContextCompat.getMainExecutor(this)
+        val biometricPrompt =
+            BiometricPrompt(activity, executor, object : BiometricPrompt.AuthenticationCallback() {
+
+
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    runOnUiThread {
+                        Toast.makeText(this@MainActivity,"Authentication Successful", Toast.LENGTH_LONG).show()
+                        this@MainActivity.startActivity(Intent(activity, FakeActivity::class.java))
+
+
+                    }
+                }
+
+            })
+
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Authentication prompt!")
+            .setSubtitle("Log in using your fingerprint")
+            .setNegativeButtonText("Cancel")
+            .build()
+        biometricPrompt.authenticate(promptInfo)
+       fingerprint_icon.setOnClickListener {
+            biometricPrompt.authenticate(promptInfo)
+        }
+
+
         if (pinManager.getPin().isNullOrEmpty()) {
             val i = Intent(this, SetPin::class.java)
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -172,6 +227,8 @@ class MainActivity : AppCompatActivity() {
         indicator2.setColorFilter(Color.parseColor("#008DB9"))
         indicator3.setColorFilter(Color.parseColor("#008DB9"))
         indicator4.setColorFilter(Color.parseColor("#008DB9"))
+
+
 
     }
 }

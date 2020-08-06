@@ -1,163 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-
-
-    <TextView
-        android:layout_above="@id/indicators"
-        android:layout_marginBottom="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Enter Password"
-        android:textSize="20sp"
-        android:textStyle="bold|normal"/>
-
-    <LinearLayout
-        android:id="@+id/indicators"
-        android:layout_marginBottom="32dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/keyboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
-            android:id="@+id/indicator1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/circle2" />
-
-        <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
-            android:id="@+id/indicator2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/circle2" />
-
-        <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
-            android:id="@+id/indicator3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/circle2" />
-
-        <ImageView
-            android:layout_marginLeft="@dimen/eight"
-            android:layout_marginRight="@dimen/eight"
-            android:id="@+id/indicator4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/circle2" />
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/keyboard"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:showDividers="beginning|middle|end">
+        android:layout_height="match_parent">
 
-        <TableRow style="@style/keyboard_row">
 
-            <TextView
-                android:id="@+id/key_1"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_one" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/indicators"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="32dp"
+            android:text="Enter Password"
+            android:textSize="20sp"
+            android:textStyle="bold|normal" />
 
-            <TextView
-                android:id="@+id/key_2"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_two" />
+        <LinearLayout
+            android:id="@+id/indicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/keyboard"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/key_3"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_three" />
-        </TableRow>
+            <ImageView
+                android:id="@+id/indicator1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:layout_marginRight="@dimen/eight"
+                android:src="@drawable/circle2" />
 
-        <TableRow style="@style/keyboard_row">
+            <ImageView
+                android:id="@+id/indicator2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:layout_marginRight="@dimen/eight"
+                android:src="@drawable/circle2" />
 
-            <TextView
-                android:id="@+id/key_4"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_four" />
+            <ImageView
+                android:id="@+id/indicator3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:layout_marginRight="@dimen/eight"
+                android:src="@drawable/circle2" />
 
-            <TextView
-                android:id="@+id/key_5"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_five" />
+            <ImageView
+                android:id="@+id/indicator4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/eight"
+                android:layout_marginRight="@dimen/eight"
+                android:src="@drawable/circle2" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/key_6"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_six" />
-        </TableRow>
+        <TableLayout
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:showDividers="beginning|middle|end">
 
-        <TableRow style="@style/keyboard_row">
+            <TableRow style="@style/keyboard_row">
 
-            <TextView
-                android:id="@+id/key_7"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_seven" />
+                <TextView
+                    android:id="@+id/key_1"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_one" />
 
-            <TextView
-                android:id="@+id/key_8"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_eight" />
+                <TextView
+                    android:id="@+id/key_2"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_two" />
 
-            <TextView
-                android:id="@+id/key_9"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_nine" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/key_3"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_three" />
+            </TableRow>
 
-        <TableRow style="@style/keyboard_row">
+            <TableRow style="@style/keyboard_row">
 
-            <TextView
-                android:id="@+id/key_clear"
-                style="@style/keyboard_button"
-                android:background="@drawable/ripple"
-                android:text="@string/btn_clear"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/key_4"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_four" />
 
-            <TextView
-                android:id="@+id/key_0"
-                style="@style/keyboard_number_button"
-                android:background="@drawable/ripple"
-                android:text="@string/number_zero" />
+                <TextView
+                    android:id="@+id/key_5"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_five" />
 
-            <TextView
-                android:id="@+id/key_backspace"
-                style="@style/keyboard_button"
-                android:background="@drawable/ripple"
-                android:text="@string/btn_backspace"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:id="@+id/key_6"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_six" />
+            </TableRow>
 
-</RelativeLayout>
+            <TableRow style="@style/keyboard_row">
+
+                <TextView
+                    android:id="@+id/key_7"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_seven" />
+
+                <TextView
+                    android:id="@+id/key_8"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_eight" />
+
+                <TextView
+                    android:id="@+id/key_9"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_nine" />
+            </TableRow>
+
+            <TableRow style="@style/keyboard_row">
+
+                <TextView
+                    android:id="@+id/key_clear"
+                    style="@style/keyboard_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/btn_clear"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/key_0"
+                    style="@style/keyboard_number_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/number_zero" />
+
+                <TextView
+                    android:id="@+id/key_backspace"
+                    style="@style/keyboard_button"
+                    android:background="@drawable/ripple"
+                    android:text="@string/btn_backspace"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/fingerprint_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/keyboard"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_baseline_fingerprint_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fingerprint_icon"
+            android:layout_centerHorizontal="true"
+            android:text="Click above to open fingerprint dialog"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
